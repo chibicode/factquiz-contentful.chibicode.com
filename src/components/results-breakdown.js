@@ -1,13 +1,12 @@
 /** @jsx jsx */
 import {jsx, css} from '@emotion/core'
-import {problems} from '../lib/quiz'
 import Emoji from './emoji'
 import CircleEmoji from './twemoji/2b55'
 import CrossEmoji from './twemoji/274c'
 import ThinkEmoji from './twemoji/1f914'
 import MonkeyEmoji from './twemoji/1f435'
 
-const ResultsBreakdown = ({selectedAnswers}) => (
+const ResultsBreakdown = ({selectedAnswers, questions}) => (
   <>
     <h3
       css={css`
@@ -34,9 +33,9 @@ const ResultsBreakdown = ({selectedAnswers}) => (
         padding: 0;
       `}
     >
-      {problems.map(({short, answer}, index) => (
-        <li key={short}>
-          {answer === selectedAnswers[index] ? (
+      {questions.map(({questionShort, answerNumber}, index) => (
+        <li key={questionShort}>
+          {answerNumber === ({ a: 1, b: 2, c: 3 })[selectedAnswers[index]] ? (
             <Emoji>
               <CircleEmoji />
             </Emoji>
@@ -45,7 +44,7 @@ const ResultsBreakdown = ({selectedAnswers}) => (
               <CrossEmoji />
             </Emoji>
           )}{' '}
-          <strong>質問{index + 1}</strong>: {short}
+          <strong>質問{index + 1}</strong>: {questionShort}
         </li>
       ))}
       <li
@@ -58,7 +57,7 @@ const ResultsBreakdown = ({selectedAnswers}) => (
             color: #777;
           `}
         >
-          (↑スクリーンショットを撮って結果をシェアしてみてください！ちなみに本には「質問13」がありますが、ボーナス問題なので省きました)
+          (↑スクリーンショットを撮って結果をシェアしてみてください！
         </span>
       </li>
     </ol>

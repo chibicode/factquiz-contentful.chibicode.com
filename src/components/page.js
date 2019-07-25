@@ -4,12 +4,12 @@ import Head from './head'
 import Container from './container'
 import Quiz from './quiz'
 
-const Page = () => (
+const Page = ({ title, description, questions }) => (
   <>
     <GlobalStyles />
-    <Head />
+    <Head title={`${title}チンパンジークイズ`} />
     <Container>
-      <Quiz />
+      <Quiz {...{ title, description, questions }} />
     </Container>
   </>
 )

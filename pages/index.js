@@ -1,18 +1,21 @@
 /* eslint camelcase: ["error", {properties: "never"}] */
 import React from 'react'
-// import { createClient } from 'contentful'
+import { createClient } from 'contentful'
 import Page from '../src/components/page'
 
-const Index = () => <Page />
+const Index = ({ data }) => {
+  return <Page title={data.fields.title} description={data.fields.description} questions={data.fields.questions.map(q => q.fields)} />
+}
 
-Index.getInitialProps = async () => {
-  // const client = createClient({
-  //   space: process.env.contentfulSpaceId,
-  //   accessToken: process.env.contentfulDeliveryAPIToken
-  // })
+Index.getInitialProps = async ({ query }) => {
+  const client = createClient({
+    space: process.env.contentfulSpaceId,
+    accessToken: process.env.contentfulDeliveryAPIToken
+  })
 
-  // TODO: Use query parameter to figure out which quiz to show
-  return {}
+  const data = await client.getEntry(query.id || '5M71CoUHIWUkFjkS74l9pu')
+
+  return { data }
 }
 
 

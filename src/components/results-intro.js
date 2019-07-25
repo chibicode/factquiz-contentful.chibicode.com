@@ -21,11 +21,11 @@ const quietCss = css`
   margin-bottom: 0.5rem;
 `
 
-const ResultsIntro = ({score}) => {
+const ResultsIntro = ({score, title, questions}) => {
   let result
-  if (score > 4) {
+  if (score > questions.length / 3) {
     result = 'win'
-  } else if (score === 4) {
+  } else if (score === questions.length / 3) {
     result = 'tie'
   } else {
     result = 'lose'
@@ -40,7 +40,7 @@ const ResultsIntro = ({score}) => {
           margin-bottom: 0.25rem;
         `}
       >
-        『<strong>ファクトフルネス</strong>』クイズの結果
+        『<strong>{title}</strong>』クイズの結果
       </p>
       <h1
         css={css`
@@ -129,7 +129,7 @@ const ResultsIntro = ({score}) => {
           text-align: center;
         `}
       >
-        12問中「
+        {questions.length}問中「
         <span
           css={css`
             color: ${colors[result]};
@@ -139,7 +139,7 @@ const ResultsIntro = ({score}) => {
         </span>
         」正解！
       </h2>
-      <p css={quietCss}>チンパンジーは平均「4問」正解します</p>
+      <p css={quietCss}>チンパンジーは平均「{questions.length / 3}問」正解します</p>
     </>
   )
 }

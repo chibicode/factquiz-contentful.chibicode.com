@@ -68,9 +68,10 @@ export default class Quiz extends Component {
   }
 
   render() {
+    const {title, description, questions} = this.props
     const {submitted, selectedAnswers} = this.state
     return submitted ? (
-      <QuizResults selectedAnswers={selectedAnswers} />
+      <QuizResults {...{title, questions}} selectedAnswers={selectedAnswers} />
     ) : (
       <div
         css={css`
@@ -79,12 +80,13 @@ export default class Quiz extends Component {
       >
         <div ref={this.problemsWrapper}>
           <QuizProblems
+            {...{title, description, questions}}
             selectedAnswers={selectedAnswers}
             setAnswer={this.setAnswer}
             submit={this.submit}
           />
         </div>
-        {selectedAnswers.length < 12 && (
+        {selectedAnswers.length < questions.length && (
           <div
             css={css`
               text-align: right;
@@ -93,11 +95,11 @@ export default class Quiz extends Component {
               font-size: 0.825rem;
             `}
           >
-            {selectedAnswers.length === 11 ? (
+            {selectedAnswers.length === questions.length - 1 ? (
               <>これが最後！</>
             ) : (
               <>
-                残り<strong>{11 - selectedAnswers.length}問</strong>
+                残り<strong>{questions.length - selectedAnswers.length}問</strong>
               </>
             )}
           </div>

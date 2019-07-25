@@ -8,10 +8,10 @@ const mapCss = css`
   margin-right: auto;
 `
 
-const Map = ({choice, isSelected, isSemiTransparent}) => (
+const Map = ({url, isSelected, isSemiTransparent}) => (
   <img
-    src={`/static/images/map-${choice}${isSelected ? '-answer' : ''}.png`}
-    alt={`Map ${choice}`}
+    src={url}
+    alt={`Map`}
     css={[
       mapCss,
       isSemiTransparent &&

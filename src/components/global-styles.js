@@ -33,7 +33,7 @@ const GlobalStyles = () => (
           font-size: 18px;
           color: #333;
           line-height: 1.8;
-          background-color: #efe5c8;
+          background-color: #eee;
         }
 
         button {

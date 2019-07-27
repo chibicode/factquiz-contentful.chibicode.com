@@ -20,7 +20,10 @@ const Intro = ({ title, description, questions }) => <>
     チンパンジークイズ
   </h1>
   {documentToReactComponents(
-  description
+  description, {renderNode: {
+    'embedded-asset-block': (node) =>
+      <img src={node.data.target.fields.file.url}/>
+  }}
 )}
   <div
     css={css`
